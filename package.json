@@ -17,11 +17,16 @@
     "audit"
   ],
   "dependencies": {
-    "gulp-contains": "^1.1.0"
+    "gulp-contains": "^1.1.0",
+    "mocha": "^3.0.2",
+    "should": "^11.1.0"
   },
   "author": {
     "name": "Liran Tal",
     "email": "<liran.tal@gmail.com>"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "gulp-util": "^3.0.7"
+  }
 }
