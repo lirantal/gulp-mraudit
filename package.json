@@ -7,6 +7,10 @@
     "type": "git",
     "url": "https://github.com/lirantal/gulp-mraudit"
   },
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha"
+  },
   "keywords": [
     "gulp",
     "build",

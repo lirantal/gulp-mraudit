@@ -15,7 +15,7 @@ var defaults = {
 function mraudit(opts) {
     
     var options = defaults;
-    if (typeof opts === 'Array' && opts.length > 0) {
+    if (Object.prototype.toString.call(opts) === '[object Array]' && opts.length > 0) {
         options = { 
             search: opts
         };
