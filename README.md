@@ -42,9 +42,6 @@ Error: Your file contains "eval(", it should not.
 npm install gulp-mraudit --save
 ```
 
-# Configuration
-
-
 # Security Best Practices
 
 Out of the box Mr Audit is configured to assert the following list of security
