@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "node index.js",
+    "lint": "eslint index.js",
     "test": "mocha"
   },
   "keywords": [
