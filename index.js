@@ -4,16 +4,26 @@ var through = require('through2');
 var gutil = require('gulp-util');
 
 var defaults = {
-  search: [
-    ' req.body.',
-    'eval(',
-    'child_process.exec(',
-    'setTimeout(',
-    'setInterval('
-  ],
-  onFound: function (string, file, cb) {
-    var error = 'Your file contains "' + string + '", it should not.';
-    cb(new gutil.PluginError('gulp-mraudit', error));
+  warnList: {
+    search: [
+      ' req.body.'
+    ],
+    onFound: function (string, file) { 
+      var error = 'Warning: Your file contains "' + string + '", it should not.';
+      console.log(error);
+    }
+  },
+  errList: {
+    search: [
+      'eval(',
+      'child_process.exec(',
+      'setTimeout(',
+      'setInterval('
+    ],
+    onFound: function (string, file) { 
+      var error = 'Error: Your file contains "' + string + '", it should not.';
+      console.log(error);
+    }
   }
 };
 
@@ -24,11 +34,16 @@ function mraudit (opts) {
 
   // Use default module settings, or apply opts which came from the user when
   // instantiating this module
-  var options = defaults;
-  if (Object.prototype.toString.call(opts) === '[object Array]' && opts.length > 0) {
-    options = { 
-      search: opts
-    };
+  var settings;
+  
+  // Sanity check the options passed to the gulp plugin
+  // Use plugin defaults, confirm it's an object, or otherwise throw an error
+  if (!opts) {
+    settings = defaults;
+  } else if (opts !== null && typeof opts === 'object') {
+    settings = opts;
+  } else {
+    return new gutil.PluginError('gulp-mraudit', 'expecting an object as parameter to function');
   }
     
   return through.obj(function (file, enc, cb) {
@@ -46,22 +61,40 @@ function mraudit (opts) {
       return;
     }
 
-    // Iterate through the array of strings to find a match,
-    // upon which we should call the handler callback for displaying a console
-    // msg
-    for (var i = 0; i <= options.search.length; i++) {
-      var match = findMatch(file.contents.toString(enc), options.search[i]);
-      if (match) {
-        options.onFound(match, file, cb);
-      }
+    // Process the warnList
+    if (settings.hasOwnProperty('warnList') && settings.warnList.hasOwnProperty('search') &&
+         Object.prototype.toString.call(settings.warnList.search) === '[object Array]')  {
+      findMatch(settings.warnList, file, enc);
     }
-
+    
+    // Process the errList
+    if (settings.hasOwnProperty('errList') && settings.errList.hasOwnProperty('search') &&
+         Object.prototype.toString.call(settings.errList.search) === '[object Array]')  {
+      var match = findMatch(settings.errList, file, enc);
+      gulpError(match, file, cb);
+    }
+  
     cb(null, file);
   });
 	
 }
 
-function findMatch(haystack, needle) {
+
+function findMatch(list, file, enc, cb) {
+  // Iterate through the array of strings to find a match,
+  // upon which we should call the handler callback for displaying
+  // a console msg
+  
+  for (var i = 0; i <= list.search.length; i++) {
+    var match = findString(file.contents.toString(enc), list.search[i]);
+    if (match) {
+      list.onFound(match, file);
+      return match;
+    }
+  }
+}
+
+function findString(haystack, needle) {
   if (typeof needle === 'string') {
     return haystack.indexOf(needle) !== -1 ? needle : false;
   }
@@ -71,6 +104,11 @@ function findMatch(haystack, needle) {
   }
 
   return false;
+}
+
+function gulpError(string, file, cb) {
+  var error = 'Your file contains "' + string + '", it should not.';
+  cb(new gutil.PluginError('gulp-mraudit', error));
 }
 
 module.exports = mraudit;
