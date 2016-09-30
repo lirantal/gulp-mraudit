@@ -15,8 +15,18 @@ Add to your Gulpfile a task called `securecode` that ensures there is no use of 
 
 ```js
 gulp.task('securecode', function() {
-  var opts = ['eval(', 'child_process.exec('];
-  gulp.src('gulpfile.js').pipe(mraudit(opts));
+  var options = {
+    errList: {
+      search: [
+        'eval('
+      ],
+      onFound: function (string, file) { 
+        var error = 'Error: found an occurrence of the code: "' + string;
+        console.log(error);
+      }
+    }
+  };
+  gulp.src('gulpfile.js').pipe(mraudit(options));
 });
 ```
 
@@ -36,11 +46,43 @@ events.js:141
 Error: Your file contains "eval(", it should not.
 ```
 
+## Gulp Example
+
+The project itself includes a [gulpfile.js](https://github.com/lirantal/gulp-mraudit/blob/master/gulpfile.js) in the root directory as an example of an operational Gulpfile.
+
 # Install
 
 ```bash
 npm install gulp-mraudit --save
 ```
+
+# Configuration
+
+The plugin expects to receive an object with two properties: `warnList` and an `errList`.
+This granularity is provided so that project owners can provide callbacks, and warnings when a match is found in the file for any string in the `warnList`, and can entirely break the build if the `errList` is matched.
+
+Simple object example:
+
+```js
+var options = {
+  warnList: {
+    search: [
+      ' req.body.'
+    ]
+  },
+  errList: {
+    search: [
+      'eval(',
+      'child_process.exec(',
+      'setTimeout(',
+      'setInterval('
+    ]
+  }
+};
+```
+
+It is also possible to provide an `onFound` property for each of the `errList` and `warnList` properties so that you can completely customize any kind of callback function trigger that happens when a match is found in either case.
+
 
 # Security Best Practices
 
