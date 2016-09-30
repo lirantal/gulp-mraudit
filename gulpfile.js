@@ -28,5 +28,5 @@ var options = {
 };
 
 gulp.task('contains', function() {
-  gulp.src('gulpfile.js').pipe(mraudit());
+  gulp.src('gulpfile.js').pipe(mraudit(options));
 });
