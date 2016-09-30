@@ -21,7 +21,7 @@ gulp.task('securecode', function() {
         'eval('
       ],
       onFound: function (string, file) { 
-        var error = 'Error: found an occurrence of the code: "' + string';
+        var error = 'Error: found an occurrence of the code: "' + string;
         console.log(error);
       }
     }
