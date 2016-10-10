@@ -9,7 +9,7 @@ var options = {
       ' req.body.'
     ],
     onFound: function (string, file) { 
-      var error = 'Warning: Your file contains "' + string + '", it should not.';
+      var error = 'Warning: Your file ' + file.history + ' contains "' + string + '", it should not.';
       console.log(error);
     }
   },
@@ -21,12 +21,12 @@ var options = {
       'setInterval('
     ],
     onFound: function (string, file) { 
-      var error = 'Error: Your file contains "' + string + '", it should not.';
+      var error = 'Error: Your file ' + file.history + ' contains "' + string + '", it should not.';
       console.log(error);
     }
   }
 };
 
-gulp.task('contains', function() {
-  gulp.src('gulpfile.js').pipe(mraudit(options));
+gulp.task('audit', function() {
+  gulp.src('package.json').pipe(mraudit(options));
 });
