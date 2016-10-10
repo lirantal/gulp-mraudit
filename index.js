@@ -9,7 +9,8 @@ var defaults = {
       ' req.body.'
     ],
     onFound: function (string, file) { 
-      var error = 'Warning: Your file contains "' + string + '", it should not.';
+      var error = 'Warning: Your file ' + file.history + ' contains "' + string + '", it should not.';
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   },
@@ -21,7 +22,8 @@ var defaults = {
       'setInterval('
     ],
     onFound: function (string, file) { 
-      var error = 'Error: Your file contains "' + string + '", it should not.';
+      var error = 'Warning: Your file ' + file.history + ' contains "' + string + '", it should not.';
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   }
@@ -71,7 +73,9 @@ function mraudit (opts) {
     if (settings.hasOwnProperty('errList') && settings.errList.hasOwnProperty('search') &&
          Object.prototype.toString.call(settings.errList.search) === '[object Array]')  {
       var match = findMatch(settings.errList, file, enc);
-      gulpError(match, file, cb);
+      if (match) {
+        gulpError(match, file, cb);
+      }
     }
   
     cb(null, file);
@@ -80,7 +84,7 @@ function mraudit (opts) {
 }
 
 
-function findMatch(list, file, enc, cb) {
+function findMatch(list, file, enc) {
   // Iterate through the array of strings to find a match,
   // upon which we should call the handler callback for displaying
   // a console msg
@@ -92,6 +96,8 @@ function findMatch(list, file, enc, cb) {
       return match;
     }
   }
+  
+  return false;
 }
 
 function findString(haystack, needle) {
