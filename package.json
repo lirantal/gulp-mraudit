@@ -1,6 +1,6 @@
 {
   "name": "gulp-mraudit",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Mr Audit is a Gulp plugin to audit JavaScript code for security related static code analysis.",
   "main": "index.js",
   "repository": {
