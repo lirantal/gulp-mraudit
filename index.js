@@ -92,7 +92,9 @@ function findMatch(list, file, enc) {
   for (var i = 0; i <= list.search.length; i++) {
     var match = findString(file.contents.toString(enc), list.search[i]);
     if (match) {
-      list.onFound(match, file);
+      if (list.hasOwnProperty('onFound')) {
+        list.onFound(match, file);
+      }
       return match;
     }
   }
