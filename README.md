@@ -1,3 +1,11 @@
+[![view on npm](http://img.shields.io/npm/v/gulp-mraudit.svg)](https://www.npmjs.org/package/gulp-mraudit)
+[![view on npm](http://img.shields.io/npm/l/gulp-mraudit.svg)](https://www.npmjs.org/package/gulp-mraudit)
+[![npm module downloads](http://img.shields.io/npm/dt/gulp-mraudit.svg)](https://www.npmjs.org/package/gulp-mraudit)
+[![Dependency Status](https://david-dm.org/lirantal/gulp-mraudit.svg)](https://david-dm.org/lirantal/gulp-mraudit)
+[![Build](https://travis-ci.org/lirantal/gulp-mraudit.svg?branch=master)](https://travis-ci.org/lirantal/gulp-mraudit)
+[![Coverage Status](https://coveralls.io/repos/lirantal/gulp-mraudit/badge.svg?branch=master&service=github)](https://coveralls.io/github/lirantal/gulp-mraudit?branch=master)
+
+
 Mr. Audit validates secure code guidelines and security best practices for
 JavaScript projects.
 
