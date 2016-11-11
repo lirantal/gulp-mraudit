@@ -13,5 +13,8 @@ addons:
     - g++-4.8
     - gcc-4.8
     - clang
+before_script:
+  - npm install -g gulp-cli
+  - npm install -g snyk
 after_script:
   - npm run coverage
