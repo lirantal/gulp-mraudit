@@ -23,6 +23,7 @@
     "audit"
   ],
   "dependencies": {
+    "gulp": "^3.9.1",
     "gulp-util": "^3.0.7",
     "mocha": "^3.0.2",
     "should": "^11.1.0",
