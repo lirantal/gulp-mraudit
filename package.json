@@ -11,7 +11,8 @@
     "start": "node index.js",
     "lint": "eslint index.js",
     "test": "mocha",
-    "coverage": "nyc mocha ./test/*.js"
+    "coverage": "nyc mocha ./test/*.js",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "keywords": [
     "gulp",
@@ -23,6 +24,7 @@
     "audit"
   ],
   "dependencies": {
+    "coveralls": "^2.11.14",
     "gulp": "^3.9.1",
     "gulp-util": "^3.0.7",
     "mocha": "^3.0.2",
