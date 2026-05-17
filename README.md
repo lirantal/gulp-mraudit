@@ -105,6 +105,10 @@ Option | Description |
 `setTimeout(`, `setInterval(` | Both of these functions can result in malicious JavaScript injection similar to how `eval(` is dangerous to use.
 
 
+## Contributing
+
+Please consult [CONTRIBUTING](./CONTRIBUTING.md) for guidelines on contributing to this project.
+
 # Author
 
 Liran Tal <liran.tal@gmail.com>
