@@ -3,7 +3,7 @@
 var mraudit = require('../index.js');
 var should = require('should');
 var gutil = require('gulp-util');
-var gulp = require('gulp');
+var Readable = require('stream').Readable;
 
 describe('gulp-mraudit plugin tests', function() {
    
@@ -235,12 +235,20 @@ describe('gulp-mraudit plugin tests', function() {
    
    it('should not process a stream because its not supported', function(done) {
       
-      gulp.src(__dirname + '/test.js', {buffer: false})
-          .pipe(mraudit())
-          .on('error', function (err) {
-            err.message.should.eql('Streaming not supported');
-            done();
-          });
+      var fileStream = new Readable();
+      fileStream._read = function() {};
+      fileStream.push('var a = 1;');
+      fileStream.push(null);
+
+      var stream = mraudit();
+      stream.on('error', function (err) {
+        err.message.should.eql('Streaming not supported');
+        done();
+      });
+
+      stream.write(new gutil.File({
+        contents: fileStream
+      }));
    });
    
    it('should throw an error if an object is not passed to mraudit', function() {
