@@ -12,7 +12,11 @@
     "lint": "eslint index.js",
     "test": "mocha",
     "coverage": "nyc mocha ./test/*.js",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "build": "echo \"No build step configured\"",
+    "lint:markdown": "markdownlint -c .github/.markdownlint.yml '**/**.md'",
+    "version": "changeset version",
+    "release": "changeset publish"
   },
   "keywords": [
     "gulp",
@@ -41,7 +45,10 @@
     "eslint-config-standard": "^6.0.1",
     "eslint-plugin-standard": "^2.0.0",
     "gulp-util": "^3.0.7",
-    "nyc": "^8.3.1"
+    "nyc": "^8.3.1",
+    "@changesets/changelog-github": "^0.6.0",
+    "@changesets/cli": "^2.31.0",
+    "markdownlint-cli": "0.45.0"
   },
   "publishConfig": {
     "provenance": true,
