@@ -2,7 +2,7 @@
 [![view on npm](http://img.shields.io/npm/l/gulp-mraudit.svg)](https://www.npmjs.org/package/gulp-mraudit)
 [![npm module downloads](http://img.shields.io/npm/dt/gulp-mraudit.svg)](https://www.npmjs.org/package/gulp-mraudit)
 <a href="https://github.com/lirantal/gulp-mraudit/actions/workflows/ci.yml"><img src="https://github.com/lirantal/gulp-mraudit/actions/workflows/ci.yml/badge.svg?branch=master" alt="build"/></a>
-[![Coverage Status](https://coveralls.io/repos/lirantal/gulp-mraudit/badge.svg?branch=master&service=github)](https://coveralls.io/github/lirantal/gulp-mraudit?branch=master)
+[![codecov](https://codecov.io/gh/lirantal/gulp-mraudit/graph/badge.svg?token=B8sBFhmIVW)](https://codecov.io/gh/lirantal/gulp-mraudit)
 
 
 Mr. Audit validates secure code guidelines and security best practices for
