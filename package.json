@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node index.js",
     "lint": "eslint index.js",
-    "test": "mocha && npm runn coverage",
+    "test": "mocha && npm run coverage",
     "coverage": "nyc mocha ./test/*.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "build": "echo \"No build step configured\"",
