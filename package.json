@@ -43,7 +43,7 @@
   "devDependencies": {
     "eslint": "^3.6.0",
     "eslint-config-standard": "^6.0.1",
-    "eslint-plugin-standard": "^2.0.0",
+    "eslint-plugin-standard": "^5.0.0",
     "gulp-util": "^3.0.7",
     "nyc": "^8.3.1",
     "@changesets/changelog-github": "^0.6.0",
